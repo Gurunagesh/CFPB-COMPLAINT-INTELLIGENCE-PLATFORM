@@ -43,7 +43,7 @@ Reports/project2/text_vectorizer.joblib
 Reports/project2/ridge_model.joblib
 
 # Legacy / unused application
-App/
+/App/
 
 # Intermediate ML artifacts
 Reports/project2/company_vectorizer.joblib
