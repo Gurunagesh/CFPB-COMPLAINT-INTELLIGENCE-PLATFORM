@@ -1,0 +1,51 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Virtual environments
+.venv/
+venv/
+risk_venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/
+
+# Datasets / generated data
+Data/
+*.csv
+*.parquet
+*.xlsx
+*.db
+*.sqlite
+*.sqlite3
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Intermediate ML artifacts
+Reports/project2/company_vectorizer.joblib
+Reports/project2/text_vectorizer.joblib
+Reports/project2/ridge_model.joblib
+
+# Legacy / unused application
+App/
+
+# Intermediate ML artifacts
+Reports/project2/company_vectorizer.joblib
+Reports/project2/text_vectorizer.joblib
+Reports/project2/ridge_model.joblib

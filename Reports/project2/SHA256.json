@@ -1,0 +1,12 @@
+{
+    "company_vectorizer.joblib": "058ff678d46a7b0546d3972755cbf82cabc1b6152edd2965e615fe17230e286e",
+    "evaluation_metadata.json": "3e4dba754f6daa5e82d820864a74c81ba1ee31fb1d035372d9039de9976623c9",
+    "feature_metadata.json": "8b34fcd9039fe16c3fae55c60c34eb2d8b28b7cef6520253dba19586f55e86b5",
+    "model_config.json": "d6a7df5f19aefd5fc1b7b62814153ded5c1b8ba3db74b876b478d391c7503461",
+    "project2_model_experiment_results.csv": "d48c6eb116d7aec9c0ae89dac21867fa21bc0286c092d56aeec50af12e12bf26",
+    "project2_tail_performance.csv": "483ccf0599fceb08d1a8dce1da59ff7ab537f5af6d20946dbeaec2a941f33435",
+    "project2_target_audit_summary.json": "1bdd0b2e2f90c7a11f38748f51406894b739987909dca200f261b312672ce00c",
+    "ridge_model.joblib": "b02faaf63f8f536e741a03102e6445692569c981e2e0bb0a06d5e583dd359f95",
+    "text_vectorizer.joblib": "630007e5b1d3b8497904944f7417af7afb8d7088d879757670c8e55b74b12024",
+    "training_metadata.json": "a822a68bc11365f39dbc762c34f998006c79fa1f1389ef1872b1018dffae4c5c"
+}

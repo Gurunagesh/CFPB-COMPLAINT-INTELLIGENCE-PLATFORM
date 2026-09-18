@@ -1,0 +1,22 @@
+{
+    "validation": {
+        "MAE": 1.3739,
+        "MedianAE": 0.2121,
+        "RMSE": 5.3644,
+        "R2": 0.0114
+    },
+    "frozen_test": {
+        "MAE": 0.4512,
+        "MedianAE": 0.1054,
+        "RMSE": 1.6663,
+        "R2": -0.2757
+    },
+    "test_baseline": {
+        "MAE": 0.1764,
+        "MedianAE": 0.0056,
+        "RMSE": 1.4853,
+        "R2": -0.0136
+    },
+    "deployment_status": "NOT_PRODUCTION_APPROVED",
+    "reason": "Final Ridge model did not outperform the simple train+validation median baseline on frozen test data."
+}

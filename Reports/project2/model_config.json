@@ -1,0 +1,38 @@
+{
+    "project": "CFPB Triage Latency Prediction",
+    "version": "1.0.0",
+    "architecture": "one-stage",
+    "algorithm": "Ridge Regression",
+    "target": "triage_delay_days",
+    "target_transform": "log1p",
+    "text_vectorizer": {
+        "type": "TfidfVectorizer",
+        "ngram_range": [
+            1,
+            2
+        ],
+        "min_df": 3,
+        "max_features": 100000,
+        "sublinear_tf": true
+    },
+    "company_vectorizer": {
+        "type": "TfidfVectorizer",
+        "analyzer": "char",
+        "ngram_range": [
+            2,
+            5
+        ],
+        "min_df": 2
+    },
+    "regression": {
+        "type": "Ridge",
+        "alpha": 1.0
+    },
+    "primary_metric": "MAE",
+    "secondary_metrics": [
+        "MedianAE",
+        "RMSE",
+        "R2"
+    ],
+    "status": "experimental_not_production_approved"
+}

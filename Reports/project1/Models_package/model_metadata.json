@@ -1,0 +1,84 @@
+{
+    "artifact_name": "project1_product_classifier",
+    "artifact_version": "1.0.0",
+    "created_at_utc": "2026-09-15T08:49:29.595020+00:00",
+    "task": "Multiclass Product Classification",
+    "target": "Product",
+    "features": [
+        "Consumer complaint narrative",
+        "Company"
+    ],
+    "training_data": {
+        "train_rows": 58422,
+        "validation_rows": 11685,
+        "development_rows": 70107
+    },
+    "feature_configuration": {
+        "word_tfidf": {
+            "ngram_range": [
+                1,
+                2
+            ],
+            "max_features": 10000
+        },
+        "char_tfidf": {
+            "ngram_range": [
+                3,
+                5
+            ],
+            "max_features": 10000
+        },
+        "company": {
+            "encoding": "OneHotEncoder",
+            "handle_unknown": "ignore"
+        }
+    },
+    "model_configuration": {
+        "algorithm": "LogisticRegression",
+        "C": 1.0,
+        "class_weight": null,
+        "max_iter": 1000
+    },
+    "classes": [
+        "Checking or savings account",
+        "Credit card",
+        "Credit reporting or other personal consumer reports",
+        "Debt collection",
+        "Debt or credit management",
+        "Money transfer, virtual currency, or money service",
+        "Mortgage",
+        "Payday loan, title loan, personal loan, or advance loan",
+        "Prepaid card",
+        "Student loan",
+        "Vehicle loan or lease"
+    ],
+    "final_test_performance": {
+        "accuracy": 0.865126,
+        "macro_f1": 0.792991,
+        "weighted_f1": 0.863177
+    },
+    "validation_to_test_gap": {
+        "accuracy": -0.00291,
+        "macro_f1": -0.011331,
+        "weighted_f1": -0.002903
+    },
+    "excluded_features": [
+        "Sub-product",
+        "Issue",
+        "Sub-issue",
+        "Company public response",
+        "Date sent to company",
+        "Company response to consumer",
+        "Timely response?",
+        "Complaint ID",
+        "Submitted via"
+    ],
+    "software_environment": {
+        "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:26:47) [MSC v.1942 64 bit (AMD64)]",
+        "platform": "Windows-10-10.0.19045-SP0",
+        "pandas": "3.0.5",
+        "numpy": "2.5.2",
+        "scikit_learn": "1.9.0",
+        "joblib": "1.5.3"
+    }
+}

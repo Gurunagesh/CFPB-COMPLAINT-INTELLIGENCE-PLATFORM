@@ -1,0 +1,17 @@
+{
+    "text_features": 100000,
+    "company_features": 20830,
+    "time_features": [
+        "hour",
+        "day_of_week",
+        "day_of_month",
+        "month",
+        "is_weekend"
+    ],
+    "total_features": 120835,
+    "feature_order": [
+        "narrative_tfidf",
+        "company_tfidf",
+        "time_features"
+    ]
+}

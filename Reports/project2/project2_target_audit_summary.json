@@ -1,0 +1,11 @@
+{
+    "target_name": "triage_delay_days",
+    "target_valid_structurally": true,
+    "negative_values": 0,
+    "missing_values": 0,
+    "infinite_values": 0,
+    "unique_values": 10806,
+    "mean_days": 1.7446874851697731,
+    "median_days": 0.009907407407407408,
+    "max_days": 146.79158564814816
+}

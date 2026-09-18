@@ -1,0 +1,8 @@
+{
+    "total_rows": 81946,
+    "unique_narratives": 74285,
+    "duplicate_narrative_groups": 1306,
+    "rows_belonging_to_duplicate_groups": 8967,
+    "conflicting_duplicate_groups": 24,
+    "rows_belonging_to_conflicting_groups": 154
+}
