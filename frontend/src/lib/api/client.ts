@@ -43,13 +43,18 @@ export async function apiClient<T>(
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
+    const headers: Record<string, string> = {
+      Accept: "application/json",
+      ...(options.headers as Record<string, string>),
+    };
+
+    if (options.body) {
+      headers["Content-Type"] = "application/json";
+    }
+
     const response = await fetch(fullUrl, {
       ...options,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        ...options.headers,
-      },
+      headers,
       signal: controller.signal,
     });
 
