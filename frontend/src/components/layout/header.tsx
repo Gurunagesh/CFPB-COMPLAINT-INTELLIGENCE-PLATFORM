@@ -9,11 +9,14 @@ import {
   AlertCircle,
   Clock,
   Terminal,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { getHealth, getReadiness } from "@/lib/api/system";
 import { getApiBaseUrl } from "@/lib/api/client";
 import { Button } from "@/components/ui/button";
 import { useDevMode } from "@/lib/context/dev-mode-context";
+import { useTheme } from "@/lib/context/theme-context";
 
 interface HeaderProps {
   onToggleSidebar: () => void;
@@ -54,6 +57,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
   };
 
   const { isDevMode, toggleDevMode } = useDevMode();
+  const { theme, toggleTheme } = useTheme();
   const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
   const [isReady, setIsReady] = useState<boolean | null>(null);
   const [isChecking, setIsChecking] = useState<boolean>(false);
@@ -141,6 +145,21 @@ export function Header({ onToggleSidebar }: HeaderProps) {
           <span className="hidden md:inline font-sans font-medium text-[11px]">
             {isDevMode ? "Dev Mode: ON" : "Dev Mode: OFF"}
           </span>
+        </button>
+
+        {/* Theme Dark/Light Toggle Button */}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white hover:border-slate-700 transition-colors"
+          title={`Switch to ${theme === "dark" ? "Light" : "Dark"} Mode`}
+          aria-label="Toggle Theme"
+        >
+          {theme === "dark" ? (
+            <Moon className="h-3.5 w-3.5 text-indigo-400" />
+          ) : (
+            <Sun className="h-3.5 w-3.5 text-amber-400" />
+          )}
         </button>
 
         {/* Developer Only: Backend Target Badge */}

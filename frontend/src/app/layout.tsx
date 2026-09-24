@@ -27,7 +27,7 @@ export default function RootLayout({
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="min-h-screen bg-slate-950 font-sans text-slate-100 antialiased selection:bg-indigo-600 selection:text-white transition-colors duration-200">
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-indigo-600 selection:text-white transition-colors duration-200">
         <ThemeProvider>
           <DevModeProvider>
             <ToastProvider>
