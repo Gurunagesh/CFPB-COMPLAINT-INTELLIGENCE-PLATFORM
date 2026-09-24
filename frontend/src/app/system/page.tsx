@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { Server, RefreshCw, CheckCircle2, AlertTriangle, Cpu, Globe, Database } from "lucide-react";
+import { Server, RefreshCw, CheckCircle2, AlertTriangle, Cpu, Globe, Database, BookOpen } from "lucide-react";
+import Link from "next/link";
 import { getHealth, getReadiness, getModels } from "@/lib/api/system";
 import { getApiBaseUrl } from "@/lib/api/client";
 import { HealthResponse, ReadyResponse, ModelsResponse } from "@/types/api";
@@ -60,11 +61,20 @@ export default function SystemPage() {
         </div>
 
         <div className="flex items-center gap-3">
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-xs text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
+          >
+            <BookOpen className="h-3.5 w-3.5 text-indigo-400" />
+            <span>View Methodology</span>
+          </Link>
+
           {lastRefreshed && (
-            <span className="text-[11px] font-mono text-slate-400">
+            <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
               Updated: {lastRefreshed}
             </span>
           )}
+
           <Button
             variant="outline"
             size="sm"

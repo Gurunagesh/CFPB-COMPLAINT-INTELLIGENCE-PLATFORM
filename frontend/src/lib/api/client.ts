@@ -1,6 +1,6 @@
 import { FastAPIValidationError, FastAPIValidationErrorDetail } from "@/types/api";
 
-const DEFAULT_TIMEOUT_MS = 25000;
+const DEFAULT_TIMEOUT_MS = 45000;
 
 export class ApiError extends Error {
   public status: number;

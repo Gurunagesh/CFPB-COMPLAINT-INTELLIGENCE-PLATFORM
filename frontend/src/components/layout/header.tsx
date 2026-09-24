@@ -8,10 +8,12 @@ import {
   Server,
   AlertCircle,
   Clock,
+  Terminal,
 } from "lucide-react";
 import { getHealth, getReadiness } from "@/lib/api/system";
 import { getApiBaseUrl } from "@/lib/api/client";
 import { Button } from "@/components/ui/button";
+import { useDevMode } from "@/lib/context/dev-mode-context";
 
 interface HeaderProps {
   onToggleSidebar: () => void;
@@ -19,24 +21,28 @@ interface HeaderProps {
 
 const ROUTE_TITLES: Record<string, { title: string; subtitle: string }> = {
   "/": {
-    title: "Intelligence Platform Overview",
-    subtitle: "Real-time inference architecture and operational status",
+    title: "Consumer Complaint Intelligence",
+    subtitle: "Real-time multi-class product classification and intake triage delay forecasting",
   },
   "/product-classification": {
     title: "Product Classification",
-    subtitle: "Project 1 • NLP multi-class product categorization",
+    subtitle: "Project 1 • Multi-class NLP complaint categorization",
   },
   "/triage-intelligence": {
     title: "Triage Latency Intelligence",
-    subtitle: "Project 2 • Estimated intake latency & operational risk band",
+    subtitle: "Project 2 • Estimated intake-to-company delay & operational risk band",
   },
   "/combined-analysis": {
     title: "Combined Inference Analysis",
     subtitle: "Unified intake executing Project 1 & Project 2 simultaneously",
   },
   "/system": {
-    title: "System & Model Health",
+    title: "System Architecture & Models",
     subtitle: "Live readiness probes, model artifacts, and evaluation metrics",
+  },
+  "/about": {
+    title: "About the Platform",
+    subtitle: "Methodology, ML evaluation benchmarks, and governance principles",
   },
 };
 
@@ -44,9 +50,10 @@ export function Header({ onToggleSidebar }: HeaderProps) {
   const pathname = usePathname();
   const routeMeta = ROUTE_TITLES[pathname] || {
     title: "CFPB Consumer Complaint Intelligence",
-    subtitle: "Machine Learning Inference Portal",
+    subtitle: "Machine Learning Inference Platform",
   };
 
+  const { isDevMode, toggleDevMode } = useDevMode();
   const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
   const [isReady, setIsReady] = useState<boolean | null>(null);
   const [isChecking, setIsChecking] = useState<boolean>(false);
@@ -73,7 +80,9 @@ export function Header({ onToggleSidebar }: HeaderProps) {
       }
 
       const now = new Date();
-      setLastChecked(now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
+      setLastChecked(
+        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+      );
     } catch {
       setIsHealthy(false);
       setIsReady(false);
@@ -115,23 +124,48 @@ export function Header({ onToggleSidebar }: HeaderProps) {
         </div>
       </div>
 
-      {/* Right: Environment & Backend Status Indicator */}
-      <div className="flex items-center gap-3">
-        {/* Environment Badge */}
-        <div className="hidden items-center gap-1.5 rounded-full border border-slate-800 bg-slate-900 px-2.5 py-1 text-[11px] font-mono md:flex">
-          <Server className="h-3 w-3 text-slate-400" />
-          <span className="text-slate-400">Target:</span>
-          <span className={isProductionBackend ? "text-indigo-400 font-semibold" : "text-amber-400 font-semibold"}>
-            {isProductionBackend ? "Render (Prod)" : "Localhost:8000"}
+      {/* Right: Environment, Developer Mode Toggle, & Live Status Indicator */}
+      <div className="flex items-center gap-2.5">
+        {/* Developer Mode Toggle Button */}
+        <button
+          type="button"
+          onClick={toggleDevMode}
+          className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-mono transition-colors ${
+            isDevMode
+              ? "border-indigo-500 bg-indigo-950/60 text-indigo-300 ring-1 ring-indigo-500/40"
+              : "border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700 hover:text-slate-200"
+          }`}
+          title="Toggle Developer & Telemetry Mode (Ctrl+Shift+D)"
+        >
+          <Terminal className="h-3.5 w-3.5" />
+          <span className="hidden md:inline font-sans font-medium text-[11px]">
+            {isDevMode ? "Dev Mode: ON" : "Dev Mode: OFF"}
           </span>
-        </div>
+        </button>
 
-        {/* Live Backend Status */}
-        <div className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900/90 px-3 py-1.5 text-xs">
+        {/* Developer Only: Backend Target Badge */}
+        {isDevMode && (
+          <div className="hidden items-center gap-1.5 rounded-full border border-slate-800 bg-slate-900 px-2.5 py-1 text-[11px] font-mono lg:flex">
+            <Server className="h-3 w-3 text-slate-400" />
+            <span className="text-slate-400">Target:</span>
+            <span
+              className={
+                isProductionBackend
+                  ? "text-indigo-400 font-semibold"
+                  : "text-amber-400 font-semibold"
+              }
+            >
+              {isProductionBackend ? "Render (Prod)" : "Localhost:8000"}
+            </span>
+          </div>
+        )}
+
+        {/* Live Status Indicator */}
+        <div className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900/90 px-2.5 py-1 text-xs">
           {isHealthy === null ? (
             <div className="flex items-center gap-1.5 text-slate-400">
               <Clock className="h-3.5 w-3.5 animate-spin" />
-              <span className="hidden sm:inline">Probing API...</span>
+              <span className="hidden sm:inline text-[11px]">Probing API...</span>
             </div>
           ) : isHealthy && isReady ? (
             <div className="flex items-center gap-1.5 text-emerald-400">
@@ -139,23 +173,27 @@ export function Header({ onToggleSidebar }: HeaderProps) {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span className="font-medium text-[11px]">API Online & Ready</span>
+              <span className="font-medium text-[11px]">API Online</span>
             </div>
           ) : (
             <div className="flex items-center gap-1.5 text-rose-400">
               <AlertCircle className="h-3.5 w-3.5" />
-              <span className="font-medium text-[11px]">API Unreachable</span>
+              <span className="font-medium text-[11px]">API Offline</span>
             </div>
           )}
 
-          {/* Manual Refresh Button */}
+          {/* Refresh Action */}
           <Button
             variant="ghost"
             size="icon"
             onClick={checkStatus}
             disabled={isChecking}
-            className="h-6 w-6 text-slate-400 hover:text-white"
-            title={lastChecked ? `Last checked: ${lastChecked}. Click to refresh status.` : "Check backend status"}
+            className="h-5 w-5 text-slate-400 hover:text-white"
+            title={
+              lastChecked
+                ? `Last checked: ${lastChecked}. Click to refresh status.`
+                : "Check backend status"
+            }
             aria-label="Refresh API Status"
           >
             <RefreshCw className={isChecking ? "h-3 w-3 animate-spin" : "h-3 w-3"} />

@@ -100,6 +100,17 @@ app.include_router(
 )
 
 
+@app.get("/")
+def root():
+    return {
+        "service": settings.app_name,
+        "version": settings.app_version,
+        "status": "online",
+        "docs_url": "/docs",
+    }
+
+
+
 # ============================================================
 # MODEL INFORMATION
 # ============================================================
